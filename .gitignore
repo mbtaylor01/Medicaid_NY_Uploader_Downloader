@@ -1,3 +1,7 @@
+# settings file
+/__pycache__
+mdny_settings.txt
+
 # Backup files # 
 *.bak 
 
