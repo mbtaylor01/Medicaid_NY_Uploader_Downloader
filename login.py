@@ -1,5 +1,7 @@
 import driver
+import login_functions as lfs
 from selenium.webdriver.common.by import By
+from emails import send_email
 from settings import SETTINGS as S
 
 
@@ -27,3 +29,8 @@ def login(chrome_driver):
     login_id = "[id$='_ContentPlaceHolder1_LoginExchange_LoginButton']"
     login_button = driver.clickable_element(chrome_driver, By.CSS_SELECTOR, login_id)
     login_button.click()
+
+    if lfs.login_failed(chrome_driver):
+        send_email(S["login_fail_subject"], S["login_fail_message"])
+
+        chrome_driver.quit()
