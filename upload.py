@@ -1,4 +1,5 @@
 import driver
+import upload_functions as ufs
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 from settings import SETTINGS as S
@@ -17,4 +18,5 @@ def upload(chrome_driver):
     batch_type_dropdown = driver.visible_element(chrome_driver, By.CSS_SELECTOR, batch_type_dropdown_id)
     Select(batch_type_dropdown).select_by_value("Professional Claims.x12")
 
-    
+    #  get a list of the files to upload (os.scandir objects)
+    files_to_upload = ufs.files_to_upload(S["upload_location"])
