@@ -44,3 +44,8 @@ def upload(chrome_driver):
             remove(file.path)
         else:
             send_email(S["upload_fail_subject"], S["upload_fail_message"])
+
+        #  identify the "<<Back" button that goes back to the upload page and click it
+        back_button_id = "[id$='_ContentPlaceHolder1_lbBack']"
+        back_button = driver.clickable_element(chrome_driver, By.CSS_SELECTOR, back_button_id)
+        back_button.click()
