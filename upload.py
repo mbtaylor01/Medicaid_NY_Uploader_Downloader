@@ -20,3 +20,15 @@ def upload(chrome_driver):
 
     #  get a list of the files to upload (os.scandir objects)
     files_to_upload = ufs.files_to_upload(S["upload_location"])
+    
+    for file in files_to_upload:
+        #  find the input box, which doesn't seem to be "visible" or "clickable" to the chromedriver
+        #  then, send the input box the file's path
+        file_input_id = "[id$='_ContentPlaceHolder1_SendFilefile0']"
+        file_input = chrome_driver.find_element(By.CSS_SELECTOR, file_input_id)
+        file_input.send_keys(file.path)
+
+        #  find the upload button and click it
+        upload_button_id = "[id$='_ContentPlaceHolder1_ibSendBatchSubmit']"
+        upload_button = driver.clickable_element(chrome_driver, By.CSS_SELECTOR, upload_button_id)
+        upload_button.click()
