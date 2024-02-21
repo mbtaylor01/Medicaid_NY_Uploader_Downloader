@@ -12,3 +12,8 @@ def files_to_upload(directory):
 def valid_upload_file(file):
     """Returns true if the file is a valid upload file."""
     return file.name.startswith(S["upload_file_prefix"]) and os.path.isfile(file.path)
+
+
+def file_uploaded(element):
+    """Returns true if the appropriate confirmation message is contained in the element."""
+    return "has been uploaded for processing" in element.text
