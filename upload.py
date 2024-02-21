@@ -2,6 +2,8 @@ import driver
 import upload_functions as ufs
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
+from os import remove
+from emails import send_email
 from settings import SETTINGS as S
 
 
@@ -32,3 +34,13 @@ def upload(chrome_driver):
         upload_button_id = "[id$='_ContentPlaceHolder1_ibSendBatchSubmit']"
         upload_button = driver.clickable_element(chrome_driver, By.CSS_SELECTOR, upload_button_id)
         upload_button.click()
+
+        #  find the span element that contains the upload confirmation message
+        confirmation_element_id = "[id$='_ContentPlaceHolder1_lblErrorMessage']"
+        confirmation_element = driver.visible_element(chrome_driver, By.CSS_SELECTOR, confirmation_element_id)
+
+        #  if the file is confirmed to be uploaded, delete the file
+        if ufs.file_uploaded(confirmation_element):
+            remove(file.path)
+        else:
+            send_email(S["upload_fail_subject"], S["upload_fail_message"])
