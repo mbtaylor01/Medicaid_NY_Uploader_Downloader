@@ -30,3 +30,7 @@ def download(chrome_driver):
             link.click()
         else:
             break
+
+    if len(files_found_to_download) > 0:
+        #  write the name of the downloaded file that was highest in the list to last_download.txt
+        dfs.record_last_download(files_found_to_download)
