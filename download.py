@@ -34,3 +34,10 @@ def download(chrome_driver):
     if len(files_found_to_download) > 0:
         #  write the name of the downloaded file that was highest in the list to last_download.txt
         dfs.record_last_download(files_found_to_download)
+
+        #  move the downloaded files to the specified destination directory
+        dfs.move_files(
+            files=files_found_to_download,
+            frm=S["browser_downloads_location"],
+            to=S["final_downloads_location"]
+        )
