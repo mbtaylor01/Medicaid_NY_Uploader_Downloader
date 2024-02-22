@@ -20,3 +20,14 @@ def move_files(files, frm, to):
         current_path = os.path.join(frm, file)
         new_path = os.path.join(to, file)
         os.rename(current_path, new_path)
+
+
+def files_exist(files, directory):
+    """Returns True or False depending on whether the files exist in the directory."""
+    for file in files:
+        file_path = os.path.join(directory, file)
+
+        if not os.path.exists(file_path):
+            return False
+        
+    return True

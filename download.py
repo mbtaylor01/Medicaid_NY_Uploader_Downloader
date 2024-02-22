@@ -1,6 +1,7 @@
 import driver
 import download_functions as dfs
 from selenium.webdriver.common.by import By
+from emails import send_email
 from settings import SETTINGS as S
 
 
@@ -41,3 +42,10 @@ def download(chrome_driver):
             frm=S["browser_downloads_location"],
             to=S["final_downloads_location"]
         )
+
+        #  if the files don't exist in the specified directory, send a warning email 
+        if not dfs.files_exist(
+                    files=files_found_to_download,
+                    directory=S["final_downloads_location"]
+                ):
+            send_email(S["download_fail_subject"], S["download_fail_message"])
