@@ -1,6 +1,7 @@
 # settings file
 /__pycache__
 mdny_settings.txt
+last_download.txt
 
 # Backup files # 
 *.bak 
