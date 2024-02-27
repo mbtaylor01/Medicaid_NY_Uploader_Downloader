@@ -1,6 +1,7 @@
 import driver
 import download_functions as dfs
 from selenium.webdriver.common.by import By
+from time import sleep
 from emails import send_email
 from settings import SETTINGS as S
 
@@ -36,12 +37,18 @@ def download(chrome_driver):
         #  write the name of the downloaded file that was highest in the list to last_download.txt
         dfs.record_last_download(files_found_to_download)
 
+        #  wait for files to finish downloading
+        sleep(5)
+
         #  move the downloaded files to the specified destination directory
         dfs.move_files(
             files=files_found_to_download,
             frm=S["browser_downloads_location"],
             to=S["final_downloads_location"]
         )
+
+        #  wait for files to finish moving
+        sleep(5)
 
         #  if the files don't exist in the specified directory, send a warning email 
         if not dfs.files_exist(
