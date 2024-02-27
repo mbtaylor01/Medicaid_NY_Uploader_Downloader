@@ -13,9 +13,10 @@ def main():
         #  create driver
         chrome_driver = driver.create_driver()
 
+        #  log in to the website
         login.login(chrome_driver)
 
-        # upload files
+        #  upload files
         upload.upload(chrome_driver)
 
         #  wait so site has a chance to retrieve the download files
@@ -24,7 +25,7 @@ def main():
         #  download files
         download.download(chrome_driver)
 
-        # quit driver
+        #  quit driver
         if eval(S['browser_is_headless']):
             chrome_driver.quit()
 

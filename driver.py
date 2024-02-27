@@ -10,12 +10,16 @@ def create_driver():
     """Creates the web driver object."""
     options = webdriver.ChromeOptions()
     chrome_service = Service(S['driver_path'])
-    chrome_service.creation_flags = CREATE_NO_WINDOW  # stops the chromedriver.exe popup box from appearing
+    #  stop the chromedriver.exe popup box from appearing
+    chrome_service.creation_flags = CREATE_NO_WINDOW  
     if eval(S['browser_is_headless']):
+        #  force browser to be a specific size
         options.add_argument("window-size=1920,1080")
-        options.add_argument("--headless=new")  # allow downloading while headless
+        #  allow downloading while headless
+        options.add_argument("--headless=new")  
     else:
-        options.add_experimental_option("detach", True)  # stops browser from closing
+        #  stop browser from closing
+        options.add_experimental_option("detach", True)  
 
     return webdriver.Chrome(service=chrome_service, options=options)
 
