@@ -4,6 +4,7 @@ import upload
 import download
 from emails import send_email
 from traceback import format_exc
+from time import sleep
 from settings import SETTINGS as S
 
 
@@ -17,6 +18,8 @@ def main():
         # upload files
         upload.upload(chrome_driver)
 
+        #  wait so site has a chance to retrieve the download files
+        sleep(30)
 
         #  download files
         download.download(chrome_driver)
