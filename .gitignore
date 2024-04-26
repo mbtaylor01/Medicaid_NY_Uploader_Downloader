@@ -2,6 +2,7 @@
 /__pycache__
 mdny_settings.txt
 last_download.txt
+/build
 
 # Backup files # 
 *.bak 
